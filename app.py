@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify, session, send_file
+from flask import send_from_directory
 import requests
 import os
 import io
@@ -127,6 +128,14 @@ def get_fear_greed() -> str:
     except:
         return "Fear & Greed: unavailable"
 
+# ── ICONS ─────────────────────────────────────────────────────
+@app.route('/icons/<path:filename>')
+def icons(filename):
+    return send_from_directory('icons', filename)
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory('icons', 'favicon.ico')
 
 # ── ROUTES ─────────────────────────────────────────────────────
 @app.route("/")
